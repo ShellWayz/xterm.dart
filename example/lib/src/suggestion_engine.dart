@@ -124,10 +124,7 @@ sealed class FigToken {
 sealed class FigSuggestion extends FigToken {
   final List<String> names;
 
-  const FigSuggestion({
-    required this.names,
-    super.description,
-  });
+  const FigSuggestion({required this.names, super.description});
 }
 
 class FigCommand extends FigSuggestion {
@@ -152,16 +149,16 @@ class FigCommand extends FigSuggestion {
     return FigCommand(
       names: singleOrList<String>(json['name']),
       description: json['description'],
-      subCommands: singleOrList(json['subcommands'])
-          .map<FigCommand>((e) => FigCommand.fromJson(e))
-          .toList(),
+      subCommands: singleOrList(
+        json['subcommands'],
+      ).map<FigCommand>((e) => FigCommand.fromJson(e)).toList(),
       requiresSubCommand: json['requiresSubCommand'] ?? false,
-      options: singleOrList(json['options'])
-          .map<FigOption>((e) => FigOption.fromJson(e))
-          .toList(),
-      args: singleOrList(json['args'])
-          .map<FigArgument>((e) => FigArgument.fromJson(e))
-          .toList(),
+      options: singleOrList(
+        json['options'],
+      ).map<FigOption>((e) => FigOption.fromJson(e)).toList(),
+      args: singleOrList(
+        json['args'],
+      ).map<FigArgument>((e) => FigArgument.fromJson(e)).toList(),
     );
   }
 
@@ -202,9 +199,9 @@ class FigOption extends FigSuggestion {
     return FigOption(
       names: singleOrList(json['name']).cast<String>(),
       description: json['description'],
-      args: singleOrList(json['args'])
-          .map<FigArgument>((e) => FigArgument.fromJson(e))
-          .toList(),
+      args: singleOrList(
+        json['args'],
+      ).map<FigArgument>((e) => FigArgument.fromJson(e)).toList(),
       isPersistent: json['isPersistent'] ?? false,
       isRequired: json['isRequired'] ?? false,
       separator: json['separator'],
